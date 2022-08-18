@@ -1,0 +1,61 @@
+﻿@page
+@model RazorPizzeria.Pages.PizzaModel
+@{
+}
+<div class="pizzaMainText text-center">
+    <h1 class="text-capitalize"> Our Great selection of pizzas</h1>
+    <p class="fs-5">
+        Choose one, or try our Pizza Builder! Then Order and Done!<br />
+        No need to give any of your details!<br />
+        We already know everything!
+    </p>
+    <p class="smallText"><i>Only one pizza per order.</i></p>
+</div>
+
+
+<div class="main_part">
+    <div class="col-12 mb-5" style="padding: 0 12px;">
+        <div class="card h-100 pizzaCard">
+            <div class="row g-0">
+                <div class="col-md-3">
+                    <img src="~/images/Pizzas/Create.png" class="img-fluid rounded-start" />
+                </div>
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h5 class="card-title fs-3">Create our own Pizza!</h5>
+                        <p class="card-text">Make our own Pizza with our Pizzas Builder!</p>
+                        <a class="btn btn-primary" asp-page="Form/CustomPizza">Try now!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="row gx-4 gx-lg-4">
+            @foreach (var pizza in @Model.fakePizzaDB)
+            {
+                var ImagePath = "~/images/Pizzas/" + pizza.ImageTitle + ".png";
+
+                <div class="col-lg-4 col-md-6 col-sm-6 mb-5">
+                    <div class="card h-100 pizzaCard">
+                        <img src="@ImagePath" asp-append-version="true"/>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" asp-area="" asp-page="Checkout/Checkout"
+                               asp-route-ImageTitle="@pizza.ImageTitle"
+                               asp-route-PizzaName="@pizza.PizzaName"
+                               asp-route-PizzaPrice="@pizza.FinalPrice">Get this Pizza!</a>
+                            <p class="float-end fs-5">@pizza.FinalPrice$</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
